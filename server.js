@@ -1,3 +1,4 @@
+// requirements and dependancies
 const express = require('express');
 const app = express();
 const mysql = require('mysql2');
@@ -8,6 +9,7 @@ app.use(express.json());
 app.use(cors());
 dotenv.config();
 
+// connecting to database
 db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USERNAME,
@@ -26,4 +28,7 @@ db.connect((err) => {
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`server is running on http://localhost:${PORT}`);
+  app.get('/', (req, res) => {
+    res.send(`Server is up and running`)
+  })
 });
