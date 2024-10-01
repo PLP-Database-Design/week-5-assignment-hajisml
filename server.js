@@ -6,6 +6,21 @@ const dotenv = require('dotenv');
 
 app.use(express.json());
 app.use(cors());
+dotenv.config();
+
+db = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+})
+
+db.connect((err) => {
+  if (err) {
+    return console.log(`Error connecting to database`)
+  }
+  console.log(`Connected successfully to database with id: ${db.threadId}`)
+})
 
 // listen to the server
 const PORT = 3000;
