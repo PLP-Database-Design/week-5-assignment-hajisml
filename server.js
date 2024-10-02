@@ -50,6 +50,18 @@ db.connect((err) => {
     });
   });
 
+  // question 3
+  app.get('/patients_first_name', (req, res) => {
+    db.query('SELECT * FROM patients', (err, results) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send(`Error retrieving patients_first_name data.`);
+      } else {
+        res.render('patients_first_name', { results: results });
+      }
+    });
+  });
+
   // listen to the server
   const PORT = 3024;
   app.listen(PORT, () => {
