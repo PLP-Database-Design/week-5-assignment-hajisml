@@ -38,6 +38,18 @@ db.connect((err) => {
     });
   });
 
+  // question 2
+  app.get('/providers', (req, res) => {
+    db.query('SELECT * FROM providers', (err, results) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send(`Error retrieving providers data.`);
+      } else {
+        res.render('providers', { results: results });
+      }
+    });
+  });
+
   // listen to the server
   const PORT = 3024;
   app.listen(PORT, () => {
