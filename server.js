@@ -62,6 +62,23 @@ db.connect((err) => {
     });
   });
 
+  // question 4
+  app.get('/providers_specialty', (req, res) => {
+    db.query(
+      `
+        SELECT provider_specialty, COUNT(provider_specialty) AS total_providers
+        FROM providers
+        GROUP BY provider_specialty
+      `, (err, results) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send(`Error retrieving providers_specialty data.`);
+      } else {
+        res.render('providers_specialty', { results: results });
+      }
+    });
+  });
+
   // listen to the server
   const PORT = 3024;
   app.listen(PORT, () => {
