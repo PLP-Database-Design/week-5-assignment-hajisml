@@ -52,7 +52,12 @@ db.connect((err) => {
 
   // question 3
   app.get('/patients_first_name', (req, res) => {
-    db.query('SELECT * FROM patients', (err, results) => {
+    db.query(
+      `
+        SELECT first_name, COUNT(first_name) AS total_patients
+        FROM patients
+        GROUP BY first_name
+      `, (err, results) => {
       if (err) {
         console.error(err);
         res.status(500).send(`Error retrieving patients_first_name data.`);

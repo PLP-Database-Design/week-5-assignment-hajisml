@@ -2,12 +2,14 @@
   <thead>
     <tr>
       <th>First Name</th>
+      <th>Total Patients</th>
     </tr>
   </thead>
   <tbody>
     <% results.forEach(row => { %>
       <tr>
         <td><%= row.first_name %></td>
+        <td><%= row.total_patients %></td>
       </tr>
     <% }); %>
   </tbody>
